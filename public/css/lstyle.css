@@ -1,0 +1,317 @@
+/*
+ЦСС израдио Лука Кресоја ©2025.
+*/
+
+
+/*
+COLOR PALLETE AND FONT DEFINITION
+*/
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --primary: #b68fb2;
+    --seconary: #FA7669;
+    --bg-top: #fafafa;
+    --bg-middle: #ececec;
+    --bg-bottom: #dfdddd;
+
+    --text: #010101;
+    --text-inverted: var(--bg-top);
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    color: var(--text);
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5{
+    font-family: "Caveat", cursive;
+}
+
+.bg-top{
+    background-color: var(--bg-top);
+}
+
+.bg-primary{
+    background-color: var(--primary);
+}
+
+.bg-secondary{
+    background-color: var(--seconary);
+}
+
+.color-text-inverted{
+    color: var(--text-inverted);
+}
+
+.color-text{
+    color: var(--text);
+}
+
+.color-secondary{
+    color: var(--seconary)
+}
+
+/*
+====> LAYOUT <====
+*/
+
+/* Flex */
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-row-collapse{
+    flex-direction: row;
+}
+
+.flex-center{
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-center-y{
+    align-items: center;
+}
+
+.flex-golden-ratio{
+    flex-basis: 61.8%;
+}
+
+.flex-golden-ratio-desktop{
+    flex-basis: 61.8%;
+}
+
+.flex-fill{
+    flex-grow: 1;
+}
+
+.flex-space-between{
+    justify-content: space-between;
+}
+
+
+/* Containers */
+
+.container-main{
+    margin-left: 20vw;
+    margin-right: 20vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.container{
+    padding: 1.5rem;
+}
+
+/* Paddings and margins */
+
+.margin-top{
+    margin-top: 1.5rem;
+}
+
+.margin-left-3-5-desktop{
+    margin-left: 4rem;
+}
+
+.margin-right-1-5-desktop{
+    margin-right: 1.5rem;
+}
+
+/* Display */
+.display-block{
+    display: block;
+}
+
+/* Transform */
+.rotate-2{
+    transform: rotate(2deg);
+}
+
+.rotate--2{
+    transform: rotate(-2deg);
+}
+
+.rotate-5{
+    transform: rotate(5deg);
+}
+
+.rotate--3{
+    transform: rotate(-3deg);
+}
+
+.offset-golden{
+    position: relative;
+    top: -10.1vh;
+}
+
+/* Aspect ratio and dimentions */
+.aspect-square{
+    aspect-ratio: 1;
+}
+
+.width-100{
+    width: 100%;
+}
+
+.height-golden{
+    height: 31.8vh;
+}
+
+/* Responsive design */
+
+.width-20vh-desktop{
+    max-width: 20vh;
+}
+
+.max-width-paragraph-desktop{
+    max-width: 75em;
+}
+
+@media only screen and (max-width: 95rem) {
+    .flex-row-collapse{
+        flex-direction: column;
+    }
+
+    .flex-golden-ratio-desktop{
+        flex-basis: auto;
+    }
+
+    .container-main{
+        padding: 2rem;
+    }
+
+    .mobile-width-100{
+        width: 100%;
+    }
+
+    .width-20vh-desktop{
+        max-width: 100%;
+    }
+
+    .margin-left-3-5-desktop{
+        margin-left: initial;
+    }
+    
+    .margin-right-1-5-desktop{
+        margin-right: initial;
+    }
+
+    .max-width-paragraph-desktop{
+        max-width: default;
+    }
+}
+
+/* ===> TEXT AND PARAGRAPH <=== */
+p{
+    max-width: 75em;
+}
+
+h1{
+    font-size: 2rem;
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
+h3{
+    font-size: 1.2rem;
+}
+
+a{
+    color: var(--seconary);
+}
+
+.decoration-none{
+    text-decoration: none;
+}
+
+
+
+/* ===> ANIMATIONS <=== */
+.clickable {
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+  
+.clickable:hover {
+    filter: brightness(0.75);
+}
+
+/* ==> IMAGE MANIPULATION <==*/
+.background-image{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ===> PAGE SPECIFICS <===*/
+/* Index */
+.logo{
+    max-width: 30rem;
+}
+
+/* Paper tape */
+.paper-tape{
+    display: inline;
+    height: 5rem;
+    position: relative;
+    left: 40%;
+    z-index: +1;
+}
+
+.taped-content{
+    position: relative;
+    top: -3rem;
+    padding: 1rem;
+}
+
+.taped-image{
+    border-style: solid;
+    border-width: 1rem;
+    border-color: var(--bg-top);
+}
+
+.taped-padding{
+    padding: 1rem;
+}
+
+/* Index */
+.width-home-screen-tiles{
+    max-width: calc(40vh + 5rem);
+}
+
+/* Post */
+.post-body img{
+    max-width: 800px;
+    display: block;
+    margin: 0 auto; /* Ne radi margin/left/right. Ne dirati!*/
+}
+
+.post-body{
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+@media only screen and (max-width: 95rem) {
+    .logo{
+        max-width: 100%;
+    }
+
+    .width-home-screen-tiles{
+        max-width: 100%;
+    }
+
+    .post-body img{
+        max-width: 75rem;
+        display: block;
+        margin: 0 auto; /* Ne radi margin/left/right. Ne dirati!*/
+    }
+}
