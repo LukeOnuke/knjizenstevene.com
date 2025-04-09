@@ -26,6 +26,7 @@ body{
 
 h1, h2, h3, h4, h5{
     font-family: "Caveat", cursive;
+    font-weight: bold;
 }
 
 .bg-top{
@@ -98,6 +99,9 @@ h1, h2, h3, h4, h5{
     justify-content: space-between;
 }
 
+.flex-gap{
+    gap: 1.5rem;
+}
 
 /* Containers */
 
@@ -126,9 +130,18 @@ h1, h2, h3, h4, h5{
     margin-right: 1.5rem;
 }
 
+.margin-y-small{
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+}
+
 /* Display */
 .display-block{
     display: block;
+}
+
+.display-inline{
+    display: inline;
 }
 
 /* Transform */
@@ -186,7 +199,7 @@ h1, h2, h3, h4, h5{
     }
 
     .container-main{
-        padding: 2rem;
+        margin: 2rem;
     }
 
     .mobile-width-100{
@@ -235,7 +248,13 @@ a{
     text-decoration: none;
 }
 
+.text-bold{
+    font-weight: bold;
+}
 
+.text-l{
+    font-size: 1.5rem;
+}
 
 /* ===> ANIMATIONS <=== */
 .clickable {
@@ -251,6 +270,20 @@ a{
 .background-image{
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* ===> Button <=== */
+button{
+    background-color: var(--primary);
+    color: var(--text-inverted);
+    border-style: solid;
+    border-radius: 0.2rem;
+    border-color: var(--text-inverted);
+    transition: filter 0.2s ease;
+}
+
+button:hover{
+    filter: brightness(0.75);
 }
 
 /* ===> PAGE SPECIFICS <===*/
@@ -300,6 +333,11 @@ a{
     border-radius: 1.5rem 1.5rem 0 0;
 }
 
+/* Footer */
+.footer-contact{
+    width: 20rem;
+}
+
 @media only screen and (max-width: 95rem) {
     .logo{
         max-width: 100%;
@@ -310,8 +348,22 @@ a{
     }
 
     .post-body img{
-        max-width: 75rem;
+        max-width: 75vw;
         display: block;
         margin: 0 auto; /* Ne radi margin/left/right. Ne dirati!*/
     }
+
+    .footer-contact{
+        width: 75vw;
+    }
+}
+
+/* cookiealert */
+.cookiealert{
+    background: var(--primary);
+}
+
+/* Main Nav */
+.main-nav{
+    padding: 0.5rem;
 }

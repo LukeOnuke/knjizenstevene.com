@@ -51,7 +51,7 @@ app.get("/posts", async function (req, res) {
         res.render("posts", {
             data: {
                 posts: posts,
-                postsTrimmed: posts.slice(2),
+                postsTrimmed: posts.slice(3),
                 categories: await CategoryService.getCategories(),
                 authors: await AuthorService.getAuthors(),
                 tags: await TagService.getTags()

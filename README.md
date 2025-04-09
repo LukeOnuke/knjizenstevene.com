@@ -1,2 +1,2 @@
-# knjizenstvene.com
-Website for the civil rights group Knjizenstvene.
+# ejs-jezik
+Website source code for Jezik u fokusu

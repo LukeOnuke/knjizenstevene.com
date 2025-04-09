@@ -1,10 +1,13 @@
 <%- include('partials/header') %>
+<%- include('partials/navbar') %>
     <div class="height-golden width-100 background-image" style="background-image: url(<%= data.post.thumbnail %>)">
 
     </div>
     <div class="flex flex-center">
         <div class="max-width-paragraph-desktop post-body bg-top container offset-golden">
-            <a href="/"><i class="fa-solid fa-house"></i> GO TO HOME</a>
+            <nav>
+                <p><a href="/"><i class="fa-solid fa-house"></i></a> > <a href="/posts">posts</a> > <a href="/<%= data.post.category.permalink %>/<%= data.post.permalink %>"><%= data.post.title %></a></p>
+            </nav>
             <div class="flex flex-row-collapse flex-center-y flex-space-between">
                 <h1>
                     <%= data.post.title %>
