@@ -55,57 +55,18 @@ export class PostService {
         })
     }
 
-    public static async getRecommendedPosts() {
-        return await repo.find({
+    static async getSimplePostById(id: number) {
+        return await repo.findOne({
             select: {
                 postId: true,
                 title: true,
+                description: true,
+                keywords: true,
                 thumbnail: true,
-                permalink: true,
-                createdAt: true,
-                displayAt: true,
-                sticky: true,
-                author: {
-                    authorId: true,
-                    name: true,
-                    permalink: true
-                },
-                category: {
-                    categoryId: true,
-                    name: true,
-                    permalink: true
-                }
+                content: true
             },
-            where: [
-                {
-                    active: true,
-                    displayAt: IsNull(),
-                    category: {
-                        active: true
-                    },
-                    author: {
-                        active: true
-                    }
-                },
-                {
-                    active: true,
-                    displayAt: LessThanOrEqual(new Date()),
-                    category: {
-                        active: true
-                    },
-                    author: {
-                        active: true
-                    }
-                }
-            ],
-            order: {
-                sticky: 'DESC',
-                postId: 'DESC'
-            },
-            take: 3,
-            relations: {
-                category: true,
-                author: true
+            where: {
+                postId: id
             }
         })
     }
@@ -147,7 +108,7 @@ export class PostService {
         return data
     }
 
-    static async getPostByCategoryAndPermalink(category: string, permalink: string) {
+    static async getPostByPermalinkAndCateogryId(permalink: string, id: number) {
         const data = await repo.findOne({
             select: {
                 postId: true,
@@ -160,7 +121,8 @@ export class PostService {
                 displayAt: true,
                 category: {
                     categoryId: true,
-                    permalink: true
+                    permalink: true,
+                    name: true
                 },
                 author: {
                     authorId: true,
@@ -175,7 +137,7 @@ export class PostService {
                     permalink: permalink,
                     displayAt: IsNull(),
                     category: {
-                        permalink: category,
+                        categoryId: id,
                         active: true
                     },
                     author: {
@@ -187,7 +149,7 @@ export class PostService {
                     permalink: permalink,
                     displayAt: LessThanOrEqual(new Date()),
                     category: {
-                        permalink: category,
+                        categoryId: id,
                         active: true
                     },
                     author: {

@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+<div class="container-main">
+  <div class="flex flex-row-collapse flex-center">
+    <%- include('partials/logo') %>
+    <div class="flex-golden-ratio-desktop">
+      <img src="/images/paper-tape/86.png" alt="Paper Tape" class="paper-tape">
+      <article class="taped-content bg-top">
+        <h1><%- site.page %></h1>
+        <%- data.content %>
+      </article>
+    </div>
+  </div>
+  <% if(data.posts){ %>
+  <section class="flex flex-column">
+    <% data.posts.forEach(post => { %>
+    <a href="/<%= post.category.permalink %>/<%= post.permalink %>" class="display-block decoration-none color-text margin-top clickable">
+      <article class="bg-top container">
+        <h2><%= post.title %></h2>
+        <p><%= post.description %> </p>
+        <p><i class="fa-regular fa-clock"></i>&nbsp;&nbsp;<%= new Date(post.displayAt?post.displayAt:post.createdAt).toLocaleDateString('sr') %></p>
+      </article>
+    </a>
+    <% }) %>
+  </section>
+  <% } %>
+</div>
+<%- include('partials/footer') %>

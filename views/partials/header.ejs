@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="<%= site.page %>" />
     <meta property="og:description" content="<%= site.desc %>" />
+    <% if(site.img != '#'){ %>
     <meta property="og:image" content="<%= site.img %>" />
+    <% } %> 
     <meta property="og:type" content="<%= site.type %>" />
     <meta property="og:site_name" content="<%= site.name %>" />
     <meta property="og:locale" content="sr-RS" />
