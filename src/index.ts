@@ -3,6 +3,9 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv"
 import morgan from "morgan"
 import { AppDataSource } from "./db"
+import { CategoryService } from "./services/category.service"
+import { AuthorService } from "./services/author.service"
+import { TagService } from "./services/tag.service"
 import { ShortService } from "./services/short.service"
 import { create } from "xmlbuilder";
 
@@ -15,14 +18,25 @@ app.use(express.static('public'))
 
 app.get("/", async function (req, res) {
     try {
+        const recommended = await PostService.getRecommendedPosts()
+
         res.render("index", {
+            data: {
+                posts: await PostService.getPosts(),
+                top: recommended[0],
+                recommended: recommended,
+                categories: await CategoryService.getCategories(),
+                authors: await AuthorService.getAuthors(),
+                tags: await TagService.getTags()
+            },
             site: {
                 page: 'Početna',
                 name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
                 desc: process.env.WEBSITE_DESC,
                 tags: process.env.WEBSITE_TAGS,
                 author: process.env.WEBSITE_AUTHOR,
-                img: '#',
+                img: recommended[0].thumbnail,
                 type: 'website'
             }
         })
@@ -34,14 +48,18 @@ app.get("/", async function (req, res) {
 app.get("/posts", async function (req, res) {
     try {
         const posts = await PostService.getPosts()
-        res.render("page", {
+        res.render("posts", {
             data: {
                 posts: posts,
-                content: 'Our most recent posts'
+                postsTrimmed: posts.slice(3),
+                categories: await CategoryService.getCategories(),
+                authors: await AuthorService.getAuthors(),
+                tags: await TagService.getTags()
             },
             site: {
-                page: 'Posts',
+                page: 'Postovi',
                 name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
                 desc: process.env.WEBSITE_DESC,
                 tags: process.env.WEBSITE_TAGS,
                 author: process.env.WEBSITE_AUTHOR,
@@ -54,48 +72,167 @@ app.get("/posts", async function (req, res) {
     }
 })
 
-registerPage('/about', 5)
-registerPage('/members', 6)
-registerPage('/workshops', 7)
-registerPage('/projects', 8)
-registerPage('/contact', 9)
-
-function registerPage(link: string, id: number) {
-    app.get(link, async function (req, res) {
-        try {
-            const post = await PostService.getSimplePostById(id)
-    
-            res.render("page", {
-                data: {
-                    content: post.content
-                },
-                site: {
-                    page: post.title,
-                    name: process.env.WEBSITE_NAME,
-                    desc: process.env.WEBSITE_DESC,
-                    tags: process.env.WEBSITE_TAGS,
-                    author: process.env.WEBSITE_AUTHOR,
-                    img: post.thumbnail,
-                    type: 'website'
-                }
-            })
-        } catch (e) {
-            res.redirect('/')
-        }
-    })
-}
-
-app.get("/terms", async function (req, res) {
+app.get("/about", async function (req, res) {
     try {
-        res.render("terms", {
+        res.render("about", {
+            data: {
+                // top: recommended[0],
+                // recommended: recommended,
+                // categories: await CategoryService.getCategories(),
+                // authors: await AuthorService.getAuthors(),
+            },
             site: {
-                page: 'Uslovi korišćenja',
+                page: 'O nama',
                 name: process.env.WEBSITE_NAME,
-
+                logo: process.env.WEBSITE_LOGO,
                 desc: process.env.WEBSITE_DESC,
                 tags: process.env.WEBSITE_TAGS,
                 author: process.env.WEBSITE_AUTHOR,
-                img: '#',
+                type: 'website'
+            }
+        })
+    } catch (e) {
+        res.redirect('/')
+    }
+})
+
+app.get("/members", async function (req, res) {
+    try {
+        res.render("members", {
+            data: {
+                authors: await AuthorService.getAuthors()
+            },
+            site: {
+                page: 'Members',
+                name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
+                desc: process.env.WEBSITE_DESC,
+                tags: process.env.WEBSITE_TAGS,
+                author: process.env.WEBSITE_AUTHOR,
+                type: 'website'
+            }
+        })
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+app.get("/workshops", async function (req, res) {
+    try {
+        res.render("workshops", {
+            data: {
+                // top: recommended[0],
+                // recommended: recommended,
+                // categories: await CategoryService.getCategories(),
+                // authors: await AuthorService.getAuthors(),
+            },
+            site: {
+                page: 'Workshops',
+                name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
+                desc: process.env.WEBSITE_DESC,
+                tags: process.env.WEBSITE_TAGS,
+                author: process.env.WEBSITE_AUTHOR,
+                type: 'website'
+            }
+        })
+    } catch (e) {
+        res.redirect('/')
+    }
+})
+
+app.get("/contact", async function (req, res) {
+    try {
+        res.render("contact", {
+            data: {
+                // top: recommended[0],
+                // recommended: recommended,
+                // categories: await CategoryService.getCategories(),
+                // authors: await AuthorService.getAuthors(),
+            },
+            site: {
+                page: 'Contact',
+                name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
+                desc: process.env.WEBSITE_DESC,
+                tags: process.env.WEBSITE_TAGS,
+                author: process.env.WEBSITE_AUTHOR,
+                type: 'website'
+            }
+        })
+    } catch (e) {
+        res.redirect('/')
+    }
+})
+
+app.get("/education-and-expirience", async function (req, res) {
+    try {
+        res.render("educationAndExperience", {
+            data: {
+                // top: recommended[0],
+                // recommended: recommended,
+                // categories: await CategoryService.getCategories(),
+                // authors: await AuthorService.getAuthors(),
+            },
+            site: {
+                page: 'Education & Experience',
+                name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
+                desc: process.env.WEBSITE_DESC,
+                tags: process.env.WEBSITE_TAGS,
+                author: process.env.WEBSITE_AUTHOR,
+                type: 'website'
+            }
+        })
+    } catch (e) {
+        res.redirect('/')
+    }
+})
+
+app.get("/other-projects", async function (req, res) {
+    try {
+        res.render("otherProjects", {
+            data: {
+                // top: recommended[0],
+                // recommended: recommended,
+                // categories: await CategoryService.getCategories(),
+                // authors: await AuthorService.getAuthors(),
+            },
+            site: {
+                page: 'Education & Experience',
+                name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
+                desc: process.env.WEBSITE_DESC,
+                tags: process.env.WEBSITE_TAGS,
+                author: process.env.WEBSITE_AUTHOR,
+                type: 'website'
+            }
+        })
+    } catch (e) {
+        res.redirect('/')
+    }
+})
+
+app.get("/terms", async function (req, res) {
+    try {
+        const recommended = await PostService.getRecommendedPosts()
+
+        res.render("terms", {
+            data: {
+                top: recommended[0],
+                recommended: recommended,
+                categories: await CategoryService.getCategories(),
+                authors: await AuthorService.getAuthors(),
+                tags: await TagService.getTags()
+            },
+            site: {
+                page: 'Uslovi korišćenja',
+                name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
+                desc: process.env.WEBSITE_DESC,
+                tags: process.env.WEBSITE_TAGS,
+                author: process.env.WEBSITE_AUTHOR,
+                img: recommended[0].thumbnail,
                 type: 'website'
             }
         })
@@ -108,14 +245,21 @@ app.get("/preview/:id", async function (req, res) {
     try {
         const id = Number.parseInt(req.params.id)
         const post = await PostService.getPostById(id)
+        const recommended = await PostService.getRecommendedPosts()
 
         res.render("post", {
             data: {
-                post: post
+                post: post,
+                top: recommended[0],
+                recommended: recommended,
+                categories: await CategoryService.getCategories(),
+                authors: await AuthorService.getAuthors(),
+                tags: await TagService.getTags()
             },
             site: {
                 page: post.title,
                 name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
                 desc: post.description,
                 tags: post.keywords,
                 author: post.author.name,
@@ -144,7 +288,7 @@ app.get("/sitemap.xml", async (req: Request, res: Response) => {
         const posts = await PostService.getPosts()
 
         // Base URL of the site (ensure it is set correctly for your app)
-        const baseUrl = "https://knjizenstvene.com"
+        const baseUrl = "https://jezikufokusu.rs"
 
         // Create XML root
         const urlset = create("urlset", { version: "1.0", encoding: "UTF-8" })
@@ -161,13 +305,8 @@ app.get("/sitemap.xml", async (req: Request, res: Response) => {
         // Add static pages
         const staticPages = [
             { loc: `${baseUrl}/`, priority: 1.0 },
-            { loc: `${baseUrl}/posts`, priority: 0.8 },
+            { loc: `${baseUrl}/terms`, priority: 0.7 },
             { loc: `${baseUrl}/about`, priority: 0.7 },
-            { loc: `${baseUrl}/members`, priority: 0.7 },
-            { loc: `${baseUrl}/workshops`, priority: 0.7 },
-            { loc: `${baseUrl}/projects`, priority: 0.7 },
-            { loc: `${baseUrl}/contact`, priority: 0.7 },
-            { loc: `${baseUrl}/terms`, priority: 0.7 }
         ]
         staticPages.forEach(({ loc, priority }) => {
             urlset
@@ -197,17 +336,26 @@ app.get("/sitemap.xml", async (req: Request, res: Response) => {
     }
 })
 
-app.get("/posts/:post", async function (req, res) {
+app.get("/:cateogry/:post", async function (req, res) {
     try {
-        const post = await PostService.getPostByPermalinkAndCateogryId(req.params.post, 1)
+        const categoryPermalink = req.params.cateogry
+        const postPermalink = req.params.post
+        const post = await PostService.getPostByCategoryAndPermalink(categoryPermalink, postPermalink)
+        const recommended = await PostService.getRecommendedPosts()
 
         res.render("post", {
             data: {
-                post: post
+                post: post,
+                top: recommended[0],
+                recommended: recommended,
+                categories: await CategoryService.getCategories(),
+                authors: await AuthorService.getAuthors(),
+                tags: await TagService.getTags()
             },
             site: {
                 page: post.title,
                 name: process.env.WEBSITE_NAME,
+                logo: process.env.WEBSITE_LOGO,
                 desc: post.description,
                 tags: post.keywords,
                 author: post.author.name,
@@ -216,7 +364,6 @@ app.get("/posts/:post", async function (req, res) {
             }
         })
     } catch (e) {
-        console.log(e)
         res.redirect('/')
     }
 })

@@ -2,6 +2,7 @@
 ЦСС израдио Лука Кресоја ©2025.
 */
 
+
 /*
 COLOR PALLETE AND FONT DEFINITION
 */
@@ -102,6 +103,10 @@ h1, h2, h3, h4, h5{
     gap: 1.5rem;
 }
 
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
 /* Containers */
 
 .container-main{
@@ -165,6 +170,11 @@ h1, h2, h3, h4, h5{
     top: -10.1vh;
 }
 
+/* Overflow */
+.overflow-hidden{
+    overflow: hidden;
+}
+
 /* Aspect ratio and dimentions */
 .aspect-square{
     aspect-ratio: 1;
@@ -178,10 +188,19 @@ h1, h2, h3, h4, h5{
     height: 31.8vh;
 }
 
+.width-10rem{
+    width: 10rem;
+}
+
 /* Responsive design */
 
 .width-20vh-desktop{
     max-width: 20vh;
+}
+
+.width-50vh-desktop{
+    width: 50vh;
+    max-width: 50vh;
 }
 
 .max-width-paragraph-desktop{
@@ -206,6 +225,11 @@ h1, h2, h3, h4, h5{
     }
 
     .width-20vh-desktop{
+        max-width: 100%;
+    }
+
+    .width-50vh-desktop{
+        width: 100%;
         max-width: 100%;
     }
 
@@ -251,8 +275,16 @@ a{
     font-weight: bold;
 }
 
+.text-center{
+    text-align: center;
+}
+
 .text-l{
     font-size: 1.5rem;
+}
+
+.font-secondary{
+    font-family: "Caveat", cursive;
 }
 
 /* ===> ANIMATIONS <=== */
@@ -310,6 +342,8 @@ button:hover{
     border-style: solid;
     border-width: 1rem;
     border-color: var(--bg-top);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .taped-padding{
@@ -357,12 +391,13 @@ button:hover{
     }
 }
 
-/* cookiealert */
-.cookiealert{
-    background: var(--primary);
-}
-
 /* Main Nav */
 .main-nav{
     padding: 0.5rem;
+    position: sticky;
+    top: 0px;
+    z-index: 10000;
+    border-bottom: 0.2rem solid var(--bg-middle);
+    background-color: #7a4775c5;
+    backdrop-filter: blur(1rem);
 }

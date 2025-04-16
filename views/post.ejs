@@ -1,31 +1,31 @@
 <%- include('partials/header') %>
 <%- include('partials/navbar') %>
-<div class="height-golden width-100 background-image" style="background-image: url(<%= data.post.thumbnail %>)">
+    <div class="height-golden width-100 background-image" style="background-image: url(<%= data.post.thumbnail %>)">
 
-</div>
-<div class="flex flex-center">
-  <div class="max-width-paragraph-desktop post-body bg-top container offset-golden">
-    <nav>
-      <p><a href="/"><i class="fa-solid fa-house"></i></a> > <a href="/<%= data.post.category.permalink %>"><%= data.post.category.name %></a> > <a href="/posts/<%= data.post.permalink %>"><%= data.post.title %></a></p>
-    </nav>
-    <div class="flex flex-row-collapse flex-center-y flex-space-between">
-      <h1>
-        <%= data.post.title %>
-      </h1>
-      <span>
-        <i class="fa-regular fa-clock"></i>&nbsp;&nbsp;
-        <%= new Date(data.post.displayAt?data.post.displayAt:data.post.createdAt).toLocaleDateString('sr') %>
-        &nbsp;&nbsp;-&nbsp;&nbsp;
-        <a href="<%= data.post.author.website %>">
-          <%= data.post.author.name %>
-        </a>
-      </span>
     </div>
+    <div class="flex flex-center">
+        <div class="max-width-paragraph-desktop post-body bg-top container offset-golden">
+            <nav>
+                <p><a href="/"><i class="fa-solid fa-house"></i></a> > <a href="/posts">posts</a> > <a href="/<%= data.post.category.permalink %>/<%= data.post.permalink %>"><%= data.post.title %></a></p>
+            </nav>
+            <div class="flex flex-row-collapse flex-center-y flex-space-between">
+                <h1>
+                    <%= data.post.title %>
+                </h1>
+                <span>
+                    <i class="fa-regular fa-clock"></i>&nbsp;&nbsp;
+                    <%= new Date(data.post.displayAt?data.post.displayAt:data.post.createdAt).toLocaleDateString('sr') %>
+                        &nbsp;&nbsp;-&nbsp;&nbsp;
+                        <a href="<%= data.post.author.website %>">
+                            <%= data.post.author.name %>
+                        </a>
+                </span>
+            </div>
+            
 
-
-    <main class="post-body">
-      <%- data.post.content %>
-    </main>
-  </div>
-</div>
-<%- include('partials/footer') %>
+            <main class="post-body">
+                <%- data.post.content %>
+            </main>
+        </div>
+    </div>
+    <%- include('partials/footer') %>

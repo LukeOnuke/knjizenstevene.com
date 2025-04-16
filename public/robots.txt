@@ -3,4 +3,4 @@ User-agent: *
 Disallow: /admin
 Disallow: /preview
 
-Sitemap: https://knjizenstvene.com/sitemap.xml
+Sitemap: https://jezikufokusu.rs/sitemap.xml

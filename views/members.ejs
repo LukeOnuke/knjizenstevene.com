@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="container-main">
+    <div class="flex flex-row-collapse flex-center">
+      <%- include('partials/logo') %>
+        <div class="flex-golden-ratio-desktop">
+          <img src="/images/paper-tape/86.png" alt="" class="paper-tape">
+          <article class="taped-content bg-top">
+            <h1>Members</h1>
+            <p></p>
+          </article>
+        </div>
+    </div>
+    <section class="flex flex-column flex-center flex-gap">
+        <% data.authors.forEach(author => { %>
+            <article class="container bg-top width-50vh-desktop overflow-hidden">
+                <h1><%= author.name %></h1>
+                <a href="<%= author.website %>"><i class="fa-solid fa-globe"></i> <%= author.website %></a>
+            </article>
+        <% }) %>
+    </section>
+</div>
+<%- include('partials/footer') %>
